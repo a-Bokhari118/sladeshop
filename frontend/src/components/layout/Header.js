@@ -1,5 +1,5 @@
 import Search from './Search';
-
+import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <>
@@ -9,14 +9,19 @@ const Header = () => {
             className='navbar-brand d-flex justify-items-center'
             style={{ height: '100%' }}
           >
-            <img
-              src='/images/s1.png'
-              alt='sladeshop'
-              style={{ width: '40px', height: '40px' }}
-            />
-            <h3 className='tht'>
-              <span style={{ color: '#fff' }}>Slade</span>Shop
-            </h3>
+            <Link to='/'>
+              <img
+                src='/images/s1.png'
+                alt='sladeshop'
+                style={{ width: '40px', height: '40px' }}
+              />
+            </Link>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              <h3 className='tht'>
+                <span style={{ color: '#fff' }}>Slade</span>
+                Shop
+              </h3>
+            </Link>
           </div>
         </div>
 
