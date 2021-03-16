@@ -10,26 +10,56 @@ import Loader from './layout/Loader';
 import { useAlert } from 'react-alert';
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
+
 const Home = ({ match }) => {
-  const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
-  const [price, setPrice] = useState([1, 1000]);
   const alert = useAlert();
-  const { loading, products, error, productsCount, resPerPage } = useSelector(
-    (state) => state.products
-  );
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [category, setCategory] = useState('');
+  const [ratings, setRatings] = useState(0);
+
+  const categories = [
+    'Electronics',
+    'Cameras',
+    'Laptops',
+    'Accessories',
+    'Headphones',
+    'Food',
+    'Books',
+    'Clothes/Shoes',
+    'Beauty/Health',
+    'Sports',
+    'Outdoor',
+    'Home',
+  ];
+  const [price, setPrice] = useState([1, 1000]);
+
+  const {
+    loading,
+    products,
+    error,
+    productsCount,
+    resPerPage,
+    filterdProductsCount,
+  } = useSelector((state) => state.products);
 
   const keyword = match.params.keyword;
   useEffect(() => {
     if (error) {
       return alert.error(error);
     }
-    dispatch(getProducts(keyword, currentPage, price));
-  }, [dispatch, error, alert, currentPage, keyword, price]);
+    dispatch(getProducts(keyword, currentPage, price, category, ratings));
+  }, [dispatch, error, alert, currentPage, keyword, price, category, ratings]);
 
   const setCurrentPageNo = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  let count = productsCount;
+  if (keyword) {
+    count = filterdProductsCount;
+  }
 
   return (
     <>
@@ -62,6 +92,51 @@ const Home = ({ match }) => {
                         value={price}
                         onChange={(price) => setPrice(price)}
                       />
+
+                      <hr className='my-5' />
+
+                      <div className='mt-5'>
+                        <h4 className='mb-3'>Categories</h4>
+                        <ul className='pl-0'>
+                          {categories.map((category) => (
+                            <li
+                              style={{
+                                cursor: 'pointer',
+                                listStyleType: 'none',
+                              }}
+                              key={category}
+                              onClick={() => setCategory(category)}
+                            >
+                              {category}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <hr className='my-3' />
+
+                      <div className='mt-5'>
+                        <h4 className='mb-3'>Ratings</h4>
+                        <ul className='pl-0'>
+                          {[5, 4, 3, 2, 1].map((star) => (
+                            <li
+                              style={{
+                                cursor: 'pointer',
+                                listStyleType: 'none',
+                              }}
+                              key={star}
+                              onClick={() => setRatings(star)}
+                            >
+                              <div className='rating-outer'>
+                                <div
+                                  className='rating-inner'
+                                  style={{ width: `${star * 20}%` }}
+                                ></div>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                   <div className='col-6 col-md-9'>
@@ -86,7 +161,7 @@ const Home = ({ match }) => {
             </div>
           </section>
 
-          {resPerPage <= productsCount && (
+          {resPerPage <= count && (
             <div className='d-flex justify-content-center mt-5'>
               <Pagination
                 activePage={currentPage}
