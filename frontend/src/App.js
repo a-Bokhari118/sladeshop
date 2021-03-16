@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
+import ProtectedRoute from './components/route/ProtectedRoute';
 import Home from './components/Home';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
@@ -29,7 +30,7 @@ function App() {
           <Route path='/product/:id' component={ProductDetails} exact />
           <Route path='/login' component={Login} exact />
           <Route path='/register' component={Register} exact />
-          <Route path='/me' component={Profile} exact />
+          <ProtectedRoute path='/me' component={Profile} exact />
         </div>
         <Footer />
       </div>
