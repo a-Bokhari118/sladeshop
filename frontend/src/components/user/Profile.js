@@ -1,10 +1,7 @@
-import { useEffect } from 'react';
-import { useAlert } from 'react-alert';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Loader from '../layout/Loader';
 import MetaData from '../layout/MetaData';
 import { Link } from 'react-router-dom';
-import { login, clearErrors } from '../../actions/userActions';
 
 const Profile = () => {
   const { user, loading } = useSelector((state) => state.auth);

@@ -462,6 +462,12 @@ footer {
   color: white;
 }
 
+.cancel-btn {
+  background-color: #c3c3c3;
+  border-color: #c3c3c3;
+  color: black;
+}
+
 .update-btn:hover {
   color: white;
 }
