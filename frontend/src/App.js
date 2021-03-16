@@ -15,6 +15,8 @@ import UpdatePassword from './components/user/UpdatePassword';
 import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 
+import Cart from './components/cart/Cart';
+
 // load loggedin user
 import { loadUser } from './actions/userActions';
 import store from './store';
@@ -43,6 +45,8 @@ function App() {
           />
           <Route path='/password/forgot' component={ForgotPassword} exact />
           <Route path='/password/reset/:token' component={NewPassword} exact />
+
+          <Route path='/cart' component={Cart} exact />
         </div>
         <Footer />
       </div>

@@ -5,6 +5,7 @@ import { getProductDetails, clearErrors } from '../../actions/productActions';
 import Loader from '../layout/Loader';
 import MetaData from '../layout/MetaData';
 import { Carousel } from 'react-bootstrap';
+import { addItemToCart } from '../../actions/cartActions';
 
 const ProductDetails = ({ match }) => {
   const dispatch = useDispatch();
@@ -37,6 +38,11 @@ const ProductDetails = ({ match }) => {
 
     const qty = count.valueAsNumber - 1;
     setQuantity(qty);
+  };
+
+  const addToCart = () => {
+    dispatch(addItemToCart(match.params.id, quantity));
+    alert.success('Item Add To Cart');
   };
 
   return (
@@ -101,6 +107,7 @@ const ProductDetails = ({ match }) => {
                 id='cart_btn'
                 className='btn btn-primary d-inline ml-4'
                 disabled={product.stock > 0 ? false : true}
+                onClick={addToCart}
               >
                 Add to Cart
               </button>
