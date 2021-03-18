@@ -16,6 +16,7 @@ import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 
 import Cart from './components/cart/Cart';
+import Shipping from './components/cart/Shipping';
 
 // load loggedin user
 import { loadUser } from './actions/userActions';
@@ -47,6 +48,8 @@ function App() {
           <Route path='/password/reset/:token' component={NewPassword} exact />
 
           <Route path='/cart' component={Cart} exact />
+
+          <ProtectedRoute path='/shipping' component={Shipping} exact />
         </div>
         <Footer />
       </div>
