@@ -17,6 +17,7 @@ import NewPassword from './components/user/NewPassword';
 
 import Cart from './components/cart/Cart';
 import Shipping from './components/cart/Shipping';
+import ConfirmOrder from './components/cart/ConfirmOrder';
 
 // load loggedin user
 import { loadUser } from './actions/userActions';
@@ -50,6 +51,11 @@ function App() {
           <Route path='/cart' component={Cart} exact />
 
           <ProtectedRoute path='/shipping' component={Shipping} exact />
+          <ProtectedRoute
+            path='/order/confirm'
+            component={ConfirmOrder}
+            exact
+          />
         </div>
         <Footer />
       </div>
