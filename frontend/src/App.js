@@ -19,6 +19,7 @@ import Cart from './components/cart/Cart';
 import Shipping from './components/cart/Shipping';
 import ConfirmOrder from './components/cart/ConfirmOrder';
 import Payment from './components/cart/Payment';
+import OrderSuccess from './components/cart/OrderSuccess';
 
 // load loggedin user
 import { loadUser } from './actions/userActions';
@@ -74,6 +75,8 @@ function App() {
               <ProtectedRoute path='/payment' component={Payment} exact />
             </Elements>
           )}
+
+          <ProtectedRoute path='/success' component={OrderSuccess} exact />
         </div>
         <Footer />
       </div>

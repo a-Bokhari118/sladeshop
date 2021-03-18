@@ -10,16 +10,14 @@ const Shipping = ({ history }) => {
   const [address, setAddress] = useState(shippingInfo.address);
   const [city, setCity] = useState(shippingInfo.city);
   const [postalCode, setPostalCode] = useState(shippingInfo.postalCode);
-  const [phoneNumber, setphoneNumber] = useState(shippingInfo.phoneNumber);
+  const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
   const [country, setCountry] = useState(shippingInfo.country);
 
   const dispatch = useDispatch();
 
   const submitHnadler = (e) => {
     e.preventDefault();
-    dispatch(
-      saveShippingInfo({ address, city, phoneNumber, postalCode, country })
-    );
+    dispatch(saveShippingInfo({ address, city, phoneNo, postalCode, country }));
     history.push('/order/confirm');
   };
   return (
@@ -61,9 +59,9 @@ const Shipping = ({ history }) => {
                 type='phone'
                 id='phone_field'
                 className='form-control'
-                value={phoneNumber}
+                value={phoneNo}
                 required
-                onChange={(e) => setphoneNumber(e.target.value)}
+                onChange={(e) => setPhoneNo(e.target.value)}
               />
             </div>
 
