@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MetaData from '../layout/MetaData';
 import { Link } from 'react-router-dom';
 import CheckoutSteps from './CheckoutSteps';
@@ -30,7 +29,7 @@ const ConfirmOrder = ({ history }) => {
 
   return (
     <>
-      <MetaData title={'Cinfirm Order'} />
+      <MetaData title={'Confirm Order'} />
       <CheckoutSteps shipping confirmOrder />
 
       <div className='row d-flex justify-content-between'>

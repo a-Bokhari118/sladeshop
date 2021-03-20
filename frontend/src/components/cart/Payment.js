@@ -64,7 +64,7 @@ const Payment = ({ history }) => {
     try {
       const config = {
         headers: {
-          'Content-Tpye': 'application/json',
+          'Content-Type': 'application/json',
         },
       };
       res = await axios.post('/api/v1/payment/process', paymentData, config);
@@ -92,13 +92,13 @@ const Payment = ({ history }) => {
             status: result.paymentIntent.status,
           };
           dispatch(createOrder(order));
+          localStorage.removeItem('cartItems');
           history.push('/success');
         } else {
           alert.error('There is some issue while payment processing');
         }
       }
     } catch (error) {
-      btnRef.current.disabled = false;
       alert.error(error.response.data.message);
     }
   };

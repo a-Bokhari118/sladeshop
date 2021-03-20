@@ -11,7 +11,10 @@ const OrderDetails = ({ match }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
-  const { loading, error, order } = useSelector((state) => state.orderDetails);
+  const { loading, error, order = {} } = useSelector(
+    (state) => state.orderDetails
+  );
+  console.log(order);
   const {
     shippingInfo,
     orderItems,
@@ -67,7 +70,7 @@ const OrderDetails = ({ match }) => {
               >
                 <b>
                   {paymentInfo?.status === 'succeeded'
-                    ? `PAID at ${String(order.paidAt).substring(1, 10)}`
+                    ? `PAID at ${String(order.paidAt).substring(0, 10)}`
                     : 'NOT PAID'}
                 </b>
               </p>

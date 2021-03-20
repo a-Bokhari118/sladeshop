@@ -18,7 +18,7 @@ const Shipping = ({ history }) => {
   const submitHnadler = (e) => {
     e.preventDefault();
     dispatch(saveShippingInfo({ address, city, phoneNo, postalCode, country }));
-    history.push('/order/confirm');
+    history.push('/confirm');
   };
   return (
     <>
