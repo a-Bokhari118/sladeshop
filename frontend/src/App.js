@@ -33,6 +33,7 @@ import store from './store';
 // ================================
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import ProdcutsList from './components/admin/ProdcutsList';
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
@@ -85,6 +86,12 @@ function App() {
           path='/dashboard'
           isAdmin={true}
           component={Dashboard}
+          exact
+        />
+        <ProtectedRoute
+          path='/admin/products'
+          isAdmin={true}
+          component={ProdcutsList}
           exact
         />
         <Footer />

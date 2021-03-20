@@ -37,6 +37,17 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// @desc    Get all products
+// @route   GET /api/v1/admin/products
+// @access  private
+exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find();
+  res.status(200).json({
+    success: true,
+    products,
+  });
+});
+
 // @desc    Get Single Product details
 // @route   POST /api/v1/product/:id
 // @access  public
