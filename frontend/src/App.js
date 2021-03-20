@@ -29,11 +29,13 @@ import Dashboard from './components/admin/Dashboard';
 // load loggedin user
 import { loadUser } from './actions/userActions';
 import store from './store';
+import { useSelector } from 'react-redux';
 
 // ================================
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import ProdcutsList from './components/admin/ProdcutsList';
+import NewProduct from './components/admin/NewProduct';
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
@@ -47,6 +49,7 @@ function App() {
     getStripeApiKey();
   }, []);
 
+  const { user, loading } = useSelector((state) => state.auth);
   return (
     <Router>
       <div className='App'>
@@ -94,7 +97,13 @@ function App() {
           component={ProdcutsList}
           exact
         />
-        <Footer />
+        <ProtectedRoute
+          path='/admin/product'
+          isAdmin={true}
+          component={NewProduct}
+          exact
+        />
+        {/* {!loading && user.role !== 'admin' && <Footer />} */}
       </div>
     </Router>
   );

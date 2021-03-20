@@ -104,7 +104,7 @@ const ProductDetails = ({ match }) => {
     formData.set('rating', rating);
     formData.set('comment', comment);
     formData.set('productId', match.params.id);
-
+    console.log(formData);
     dispatch(newReview(formData));
   };
   return (
