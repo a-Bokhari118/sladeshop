@@ -5,19 +5,20 @@ import { MDBDataTable } from 'mdbreact';
 import MetaData from '../layout/MetaData';
 import Loader from '../layout/Loader';
 import Sidebar from './Sidebar';
-import { getProductReviews, clearErrors } from '../../actions/productActions';
-import { GET_REVIEWS_RESET } from '../../constants/productConstants';
-import { Link } from 'react-router-dom';
+import {
+  getProductReviews,
+  clearErrors,
+  deleteReview,
+} from '../../actions/productActions';
+import { DELETE_REVIEW_RESET } from '../../constants/productConstants';
 
 const ProductReviews = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const [productId, setProductId] = useState('');
 
-  const { loading, error, reviews } = useSelector(
-    (state) => state.productReviews
-  );
-
+  const { error, reviews } = useSelector((state) => state.productReviews);
+  const { isDeleted } = useSelector((state) => state.review);
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -27,12 +28,11 @@ const ProductReviews = () => {
       dispatch(getProductReviews(productId));
     }
 
-    // if (isDeleted) {
-    //   alert.success('User Deleted Successfully');
-    //   history.push('/admin/users');
-    //   dispatch({ type: DELETE_USER_RESET });
-    // }
-  }, [dispatch, alert, error, productId]);
+    if (isDeleted) {
+      alert.success('review Deleted Successfully');
+      dispatch({ type: DELETE_REVIEW_RESET });
+    }
+  }, [dispatch, alert, error, productId, isDeleted]);
 
   const setReviews = () => {
     const data = {
@@ -71,23 +71,21 @@ const ProductReviews = () => {
         comment: review.comment,
         user: review.name,
         actions: (
-          <Link>
-            <button
-              classNameName='btn btn-danger py-1 px-2 ml-2'
-              //   onClick={() => deleteReviewHandler(review._id)}
-            >
-              <i classNameName='fa fa-trash'></i>
-            </button>
-          </Link>
+          <button
+            classNameName='btn btn-danger py-1 px-2 ml-2'
+            onClick={() => deleteReviewHandler(review._id)}
+          >
+            <i classNameName='fa fa-trash'></i>
+          </button>
         ),
       });
     });
     return data;
   };
 
-  //   const deleteUserHandler = (id) => {
-  //     dispatch(deleteUser(id));
-  //   };
+  const deleteReviewHandler = (id) => {
+    dispatch(deleteReview(id, productId));
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
