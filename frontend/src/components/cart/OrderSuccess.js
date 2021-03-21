@@ -22,7 +22,7 @@ const OrderSuccess = ({ history }) => {
       };
       upQty();
     }
-  }, [order, loading]);
+  }, [order, loading, history]);
 
   return (
     <>

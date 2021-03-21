@@ -18,7 +18,6 @@ import {
   DELETE_ORDER_FAIL,
   DELETE_ORDER_REQUEST,
   DELETE_ORDER_SUCCESS,
-  DELETE_ORDER_RESET,
 } from '../constants/orderConstanst';
 import axios from 'axios';
 

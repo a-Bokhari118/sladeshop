@@ -39,7 +39,7 @@ const UpdateUser = ({ match, history }) => {
 
       dispatch({ type: UPDATE_USER_RESET });
     }
-  }, [dispatch, error, alert, history, isUpdated, user]);
+  }, [dispatch, error, alert, history, isUpdated, user, userId]);
 
   const submitHandler = (e) => {
     e.preventDefault();

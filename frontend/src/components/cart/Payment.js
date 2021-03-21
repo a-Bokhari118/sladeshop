@@ -95,6 +95,7 @@ const Payment = ({ history }) => {
           dispatch(createOrder(order));
 
           cartItems.map((item) => {
+            // eslint-disable-next-line
             dispatch(removeItemFromCart(item.product));
           });
           localStorage.removeItem('cartItems');

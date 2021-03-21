@@ -71,7 +71,16 @@ const UpdateProduct = ({ match, history }) => {
       alert.success('Product Updated Successfully');
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
-  }, [dispatch, alert, error, isUpdated, history, updateError, productId]);
+  }, [
+    dispatch,
+    alert,
+    error,
+    isUpdated,
+    history,
+    updateError,
+    productId,
+    product,
+  ]);
   const submitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData();

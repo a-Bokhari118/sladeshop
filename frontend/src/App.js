@@ -148,7 +148,7 @@ function App() {
           component={ProductReviews}
           exact
         />
-        {/* {!loading && user.role !== 'admin' && <Footer />} */}
+        {!loading && user?.role !== 'admin' && <Footer />}
       </div>
     </Router>
   );
