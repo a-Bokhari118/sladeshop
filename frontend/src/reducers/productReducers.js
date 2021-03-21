@@ -25,6 +25,9 @@ import {
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT_SUCCESS,
   UPDATE_PRODUCT_RESET,
+  GET_REVIEWS_FAIL,
+  GET_REVIEWS_REQUEST,
+  GET_REVIEWS_SUCCESS,
 } from '../constants/productConstants';
 //Get all products reducer
 export const productsReducer = (state = { products: [] }, action) => {
@@ -192,6 +195,34 @@ export const newReviewReducer = (state = {}, action) => {
         ...state,
         success: false,
       };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const productReviewsReducer = (state = { reviews: [] }, action) => {
+  switch (action.type) {
+    case GET_REVIEWS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_REVIEWS_SUCCESS:
+      return {
+        loading: false,
+        reviews: action.payload,
+      };
+    case GET_REVIEWS_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     case CLEAR_ERRORS:
       return {
         ...state,
