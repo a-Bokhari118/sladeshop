@@ -25,6 +25,9 @@ import {
   NEW_PASSWORD_FAIL,
   NEW_PASSWORD_SUCCESS,
   NEW_PASSWORD_REQUEST,
+  ALL_USERS_FAIL,
+  ALL_USERS_SUCCESS,
+  ALL_USERS_REQUEST,
 } from '../constants/userConstants';
 export const authReducer = (state = { user: {} }, action) => {
   switch (action.type) {

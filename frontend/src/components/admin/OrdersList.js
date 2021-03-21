@@ -6,14 +6,19 @@ import MetaData from '../layout/MetaData';
 import Loader from '../layout/Loader';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
-import { getAllOrders, clearErrors } from '../../actions/orderActions';
-//import {  } from '../../constants/orderConstants';
+import {
+  deleteOrder,
+  getAllOrders,
+  clearErrors,
+} from '../../actions/orderActions';
+import { DELETE_ORDER_RESET } from '../../constants/orderConstanst';
 
-const OrdersList = () => {
+const OrdersList = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
   const { loading, error, orders } = useSelector((state) => state.allOrders);
+  const { isDeleted } = useSelector((state) => state.order);
 
   useEffect(() => {
     dispatch(getAllOrders());
@@ -22,11 +27,12 @@ const OrdersList = () => {
       dispatch(clearErrors());
     }
 
-    // if (isDeleted) {
-    //   alert.success('Product Deleted Successfully');
-    //   dispatch({ type: DELETE_PRODUCT_RESET });
-    // }
-  }, [dispatch, alert, error]);
+    if (isDeleted) {
+      alert.success('Order Deleted Successfully');
+      history.push('/admin/orders');
+      dispatch({ type: DELETE_ORDER_RESET });
+    }
+  }, [dispatch, alert, error, isDeleted, history]);
 
   const setOrders = () => {
     const data = {
@@ -78,7 +84,10 @@ const OrdersList = () => {
             >
               <i className='fa fa-eye'></i>
             </Link>
-            <button className='btn btn-danger py-1 px-2 ml-2'>
+            <button
+              className='btn btn-danger py-1 px-2 ml-2'
+              onClick={() => deleteOrderHandler(order._id)}
+            >
               <i className='fa fa-trash'></i>
             </button>
           </Link>
@@ -86,6 +95,10 @@ const OrdersList = () => {
       });
     });
     return data;
+  };
+
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id));
   };
   return (
     <>
