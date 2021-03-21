@@ -6,15 +6,19 @@ import MetaData from '../layout/MetaData';
 import Loader from '../layout/Loader';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
-import { getAllUsers, clearErrors } from '../../actions/userActions';
-//import { DELETE_ORDER_RESET } from '../../constants/userConstants';
+import {
+  getAllUsers,
+  clearErrors,
+  deleteUser,
+} from '../../actions/userActions';
+import { DELETE_USER_RESET } from '../../constants/userConstants';
 
 const UsersList = ({ history }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
 
   const { loading, error, users } = useSelector((state) => state.allUsers);
-  //const { isDeleted } = useSelector((state) => state.user);
+  const { isDeleted } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -23,12 +27,12 @@ const UsersList = ({ history }) => {
       dispatch(clearErrors());
     }
 
-    //   if (isDeleted) {
-    //     alert.success('Order Deleted Successfully');
-    //     history.push('/admin/orders');
-    //     dispatch({ type: DELETE_ORDER_RESET });
-    //   }
-  }, [dispatch, alert, error]);
+    if (isDeleted) {
+      alert.success('User Deleted Successfully');
+      history.push('/admin/users');
+      dispatch({ type: DELETE_USER_RESET });
+    }
+  }, [dispatch, alert, error, isDeleted, history]);
 
   const setUsers = () => {
     const data = {
@@ -76,7 +80,7 @@ const UsersList = ({ history }) => {
             </Link>
             <button
               className='btn btn-danger py-1 px-2 ml-2'
-              // onClick={() => deleteuserHandler(user._id)}
+              onClick={() => deleteUserHandler(user._id)}
             >
               <i className='fa fa-trash'></i>
             </button>
@@ -87,9 +91,9 @@ const UsersList = ({ history }) => {
     return data;
   };
 
-  // const deleteOrderHandler = (id) => {
-  //   dispatch(deleteOrder(id));
-  // };
+  const deleteUserHandler = (id) => {
+    dispatch(deleteUser(id));
+  };
   return (
     <>
       <MetaData title={`Users`} />
