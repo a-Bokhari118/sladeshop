@@ -10,6 +10,7 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
+import { removeItemFromCart } from '../../actions/cartActions';
 import axios from 'axios';
 import { createOrder, clearErrors } from '../../actions/orderActions';
 const options = {
@@ -92,6 +93,10 @@ const Payment = ({ history }) => {
             status: result.paymentIntent.status,
           };
           dispatch(createOrder(order));
+
+          cartItems.map((item) => {
+            dispatch(removeItemFromCart(item.product));
+          });
           localStorage.removeItem('cartItems');
           history.push('/success');
         } else {

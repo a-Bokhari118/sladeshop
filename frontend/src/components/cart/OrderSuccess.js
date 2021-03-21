@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const OrderSuccess = ({ history }) => {
   const { order, loading } = useSelector((state) => state.newOrder);
+
   useEffect(() => {
     if (!loading && !order) {
       history.push('/');
