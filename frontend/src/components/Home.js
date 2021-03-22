@@ -69,7 +69,9 @@ const Home = ({ match }) => {
         <>
           <MetaData title={`Buy Online Products`} />
           <h1 id='products_heading'>Latest Products</h1>
-
+          <p>
+            This is not a real store, this website made for learning purpose :)
+          </p>
           <section id='products' className='container mt-5'>
             <div className='row'>
               {keyword ? (
